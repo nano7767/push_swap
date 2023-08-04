@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 15:27:42 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/04 15:08:31 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:35:56 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	free_stack(t_stack *stack);
 
 //error.c
 void	ft_error(long num, char *arg_split, t_stack *stack_a);
-void	check_valid(t_stack *stack_a);
 void	check_dup(t_stack *stack_a);
 void	check_sort(t_stack *stack_a);
 void	err_exit(t_stack *stack);
+void	free_stack(t_stack *stack);
 
 //operations.c
 void	swap(t_stack **stack);
@@ -65,6 +65,7 @@ void	rrb(t_stack **stack_b);
 
 //small_sort.c
 void	sort_three(t_stack **stack_a);
+void	sort_four(t_stack **stack_a, t_stack **stack_b);
 void	sort_five(t_stack **stack_a, t_stack **stack_b);
 void	push_smallest(t_stack **stack_a, t_stack **stack_b);
 

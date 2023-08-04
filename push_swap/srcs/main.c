@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 15:05:59 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/04 15:57:17 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:20:00 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ int	main(int argc, char **argv)
 	check_sort(stack_a);
 	stack_b = init_stack();
 	push_swap(&stack_a, &stack_b);
-	free(stack_a);
-	free(stack_b);
-	return (0);
 }
 
 t_stack	*init_stack(void)
@@ -59,7 +56,6 @@ t_stack	*init_stack(void)
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
-	// stack = NULL;
 	stack->next = NULL;
 	stack->len = 0;
 	stack->max_num = 0;
@@ -77,14 +73,28 @@ void	get_val(t_stack **stack_a, char *arg)
 	while (arg_split[i])
 	{
 		num = ft_atoi(arg_split[i]);
-		ft_error(num, arg_split[i], *stack_a);
 		if (num > (*stack_a)->max_num)
 			(*stack_a)->max_num = num;
 		num_to_stack(stack_a, num);
+		ft_error(num, arg_split[i], *stack_a);
 		free(arg_split[i]);
 		i++;
 	}
 	free(arg_split);
+}
+
+t_stack	*ft_newnode(int num)
+{
+	t_stack	*new;
+
+	new = NULL;
+	new = (t_stack *)malloc(sizeof(t_stack));
+	if (!new)
+		return (NULL);
+	new->data = num;
+	new->indx = 0;
+	new->next = NULL;
+	return (new);
 }
 
 void	num_to_stack(t_stack **stack_a, int num)
@@ -92,46 +102,18 @@ void	num_to_stack(t_stack **stack_a, int num)
 	t_stack	*new_node;
 	t_stack	*ptr;
 
-	new_node = malloc(sizeof(t_stack));
-	if (!new_node)
-		return ;
-	new_node->next = NULL;
-	new_node->data = num;
-	new_node->indx = 0;
+	new_node = ft_newnode(num);
 	if ((*stack_a)->len == 0)
 	{
+		free(*stack_a);
+		*stack_a = NULL;
 		*stack_a = new_node;
 		(*stack_a)->len++;
 		return ;
 	}
-	ptr = ft_stacklast(*stack_a);
-	ptr->next = new_node;
-	(*stack_a)->len++;
-}
-
-t_stack	*ft_stacklast(t_stack *stack_a)
-{
-	t_stack	*ptr;
-
-	if (!stack_a)
-		return (NULL);
-	ptr = stack_a;
+	ptr = *stack_a;
 	while (ptr->next)
 		ptr = ptr->next;
-	return (ptr);
-}
-
-void	free_stack(t_stack *stack)
-{
-	t_stack	*ptr;
-	t_stack	*ptr2;
-
-	ptr = stack;
-	while (stack)
-	{
-		ptr2 = ptr->next;
-		stack = (stack)->next;
-		free(ptr);
-		ptr = ptr2;
-	}
+	ptr->next = new_node;
+	(*stack_a)->len++;
 }

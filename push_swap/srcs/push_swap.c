@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:42:12 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/04 11:09:59 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:39:09 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,22 @@ void	push_swap(t_stack **stack_a, t_stack **stack_b)
 	}
 	else if ((*stack_a)->len == 3)
 		sort_three(stack_a);
+	else if ((*stack_a)->len == 4)
+		sort_four(stack_a, stack_b);
 	else if ((*stack_a)->len == 5)
 		sort_five(stack_a, stack_b);
 	else
 		radix_sort(stack_a, stack_b);
+	// t_stack	*ptr;
+
 	// ptr = *stack_a;
 	// while (ptr)
 	// {
-	// 	ft_printf("%d ", ptr->data);
+	// 	printf("%ld ", ptr->data);
 	// 	ptr = ptr->next;
 	// }
+	free_stack(*stack_a);
+	free_stack(*stack_b);
 }
 
 t_stack	*min_node(t_stack **stack_a)
@@ -66,6 +72,3 @@ void	sort_indx(t_stack **stack_a)
 		i++;
 	}
 }
-
-
-//CHANGE MIN INDX TO I++ ONLY IF DOESNT HAVE AN INDX ALREADY.

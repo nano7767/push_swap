@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:23:18 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/04 14:55:44 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:29:21 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,15 @@ void	ft_error(long num, char *arg_split, t_stack *stack_a)
 		{
 			if (arg_split[i + 1] == '+' || arg_split[i + 1] == '-')
 				err_exit(stack_a);
-			// {
-			// 	write(2, "Error\n", 6);
-			// 	exit(1);
-			// }
 		}
 		if (!ft_isdigit(arg_split[i]))
 			err_exit(stack_a);
-		// {
-		// 	write(2, "Error\n", 6);
-		// 	exit(1);
-		// }
 		i++;
 	}
 	if (num == 0 && arg_split[0] != '0')
 		err_exit(stack_a);
-	// {
-	// 	write(2, "Error\n", 6);
-	// 	exit(1);
-	// }
 	if ((num > 2147483647 || num < -2147483648))
 		err_exit(stack_a);
-	// {
-	// 	write(2, "Error\n", 6);
-	// 	exit(1);
-	// }
 }
 
 void	check_dup(t_stack *stack_a)
@@ -65,11 +49,6 @@ void	check_dup(t_stack *stack_a)
 		{
 			if (ptr->data == ptr2->data)
 				err_exit(stack_a);
-			// {
-			// 	free(stack_a);
-			// 	write(2, "Error\n", 6);
-			// 	exit(1);
-			// }
 			ptr2 = ptr2->next;
 		}
 		ptr = ptr->next;
@@ -79,6 +58,7 @@ void	check_dup(t_stack *stack_a)
 void	check_sort(t_stack *stack_a)
 {
 	t_stack	*ptr;
+
 	ptr = stack_a;
 	while (ptr->next)
 	{
@@ -87,11 +67,20 @@ void	check_sort(t_stack *stack_a)
 		else
 			return ;
 	}
-	free(stack_a);
-	exit (0);
+	free_stack(stack_a);
+	stack_a = NULL;
+	exit(0);
 }
 
 void	err_exit(t_stack *stack)
+{
+	free_stack(stack);
+	stack = NULL;
+	write(2, "Error\n", 6);
+	exit(1);
+}
+
+void	free_stack(t_stack *stack)
 {
 	t_stack	*ptr;
 	t_stack	*ptr2;
@@ -104,25 +93,4 @@ void	err_exit(t_stack *stack)
 		free(ptr);
 		ptr = ptr2;
 	}
-	stack = NULL;
-	write(2, "Error\n", 6);
-	exit(1);
 }
-
-// void	ft_lstclear(t_list **lst, void (*del)(void *))
-// {
-// 	t_list	*ptr;
-// 	t_list	*ptr2;
-
-// 	if (lst == NULL || del == NULL)
-// 		return ;
-// 	ptr = *lst;
-// 	while (ptr != NULL)
-// 	{
-// 		ptr2 = ptr->next;
-// 		del(ptr->content);
-// 		free(ptr);
-// 		ptr = ptr2;
-// 	}
-// 	*lst = NULL;
-// }
