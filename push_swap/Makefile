@@ -6,7 +6,7 @@
 #    By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:51:41 by svikornv          #+#    #+#              #
-#    Updated: 2023/07/16 12:12:37 by svikornv         ###   ########.fr        #
+#    Updated: 2023/07/20 12:36:01 by svikornv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ INCLUDE_DIR = includes
 
 #Sources and objects
 SRCS = main.c \
+	error.c \
 	moves_a.c \
 	moves_b.c \
 	operations.c \

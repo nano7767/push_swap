@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 15:27:42 by svikornv          #+#    #+#             */
-/*   Updated: 2023/07/16 12:05:14 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/04 15:08:31 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,31 @@
 
 typedef struct s_stack
 {
-	int	data;
+	long	data;
 	struct s_stack *next;
+	int	indx;
 	int	len;
 	int	max_digits;
+	int	max_num;
 }		t_stack;
 
+typedef	struct s_vars
+{
+	int	characters;
+}		t_vars;
 //main.c
-void	get_max_digits(t_stack *stack_a, int num);
+t_stack	*init_stack(void);
+void	get_val(t_stack **stack_a, char *arg);
 void	num_to_stack(t_stack **stack_a, int num);
 t_stack	*ft_stacklast(t_stack *stack_a);
+void	free_stack(t_stack *stack);
 
+//error.c
+void	ft_error(long num, char *arg_split, t_stack *stack_a);
+void	check_valid(t_stack *stack_a);
+void	check_dup(t_stack *stack_a);
+void	check_sort(t_stack *stack_a);
+void	err_exit(t_stack *stack);
 
 //operations.c
 void	swap(t_stack **stack);
@@ -55,9 +69,11 @@ void	sort_five(t_stack **stack_a, t_stack **stack_b);
 void	push_smallest(t_stack **stack_a, t_stack **stack_b);
 
 //radix_sort.c
-void	radix_sort(t_stack **stack_a);
-int		get_digit(int num, int digit);
+int	get_bits(t_stack *stack_a);
+void	radix_sort(t_stack **stack_a, t_stack **stack_b);
 
 //push_swap.c
 void	push_swap(t_stack **stack_a, t_stack **stack_b);
+t_stack	*min_node(t_stack **stack_a);
+void	sort_indx(t_stack **stack_a);
 #endif

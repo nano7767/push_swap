@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 15:05:59 by svikornv          #+#    #+#             */
-/*   Updated: 2023/07/16 12:08:56 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/04 15:57:17 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,49 +16,75 @@ int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	t_vars	v;
 	int	i;
-	int	num;
+	int	j;
 
-	if (argc == 1)
-	{
-		printf("empty parameter");
-		return (1);
-	}
-	stack_a = malloc(sizeof(t_stack));
-	if (!stack_a)
-		return (1);
-	stack_a->next = NULL;
-	stack_b = malloc(sizeof(t_stack));
-	if (!stack_b)
-		return (1);
-	stack_b->next = NULL;
+	stack_a = init_stack();
 	i = 0;
-	stack_a->len = 0;
+	v.characters = 0;
 	while (i < argc - 1)
 	{
-		num = ft_atoi(argv[i + 1]);
-		num_to_stack(&stack_a, num);
-		get_max_digits(stack_a, num);
+		j = 0;
+		while (argv[i + 1][j])
+		{
+			if ((argv[i + 1][j] != ' ') && argv[i + 1][j] != '\t')
+				v.characters++;
+			if (argv[i + 1][j] == '\t')
+				argv[i + 1][j] = ' ';
+			j++;
+		}
+		if (v.characters == 0)
+		{
+			write(2, "Error\n", 6);
+			exit(1);
+		}
+		v.characters = 0;
+		get_val(&stack_a, argv[i + 1]);
 		i++;
 	}
+	check_dup(stack_a);
+	check_sort(stack_a);
+	stack_b = init_stack();
 	push_swap(&stack_a, &stack_b);
 	free(stack_a);
 	free(stack_b);
 	return (0);
 }
 
-void	get_max_digits(t_stack *stack_a, int num)
+t_stack	*init_stack(void)
 {
-	int	digits;
+	t_stack	*stack;
 
-	digits = 0;
-	while (num != 0)
+	stack = malloc(sizeof(t_stack));
+	if (!stack)
+		return (NULL);
+	// stack = NULL;
+	stack->next = NULL;
+	stack->len = 0;
+	stack->max_num = 0;
+	return (stack);
+}
+
+void	get_val(t_stack **stack_a, char *arg)
+{
+	char	**arg_split;
+	int		i;
+	long		num;
+
+	arg_split = ft_split(arg, ' ');
+	i = 0;
+	while (arg_split[i])
 	{
-		digits++;
-		num /= 10;
+		num = ft_atoi(arg_split[i]);
+		ft_error(num, arg_split[i], *stack_a);
+		if (num > (*stack_a)->max_num)
+			(*stack_a)->max_num = num;
+		num_to_stack(stack_a, num);
+		free(arg_split[i]);
+		i++;
 	}
-	if (digits > stack_a->max_digits)
-		stack_a->max_digits = digits;
+	free(arg_split);
 }
 
 void	num_to_stack(t_stack **stack_a, int num)
@@ -71,6 +97,7 @@ void	num_to_stack(t_stack **stack_a, int num)
 		return ;
 	new_node->next = NULL;
 	new_node->data = num;
+	new_node->indx = 0;
 	if ((*stack_a)->len == 0)
 	{
 		*stack_a = new_node;
@@ -85,8 +112,6 @@ void	num_to_stack(t_stack **stack_a, int num)
 t_stack	*ft_stacklast(t_stack *stack_a)
 {
 	t_stack	*ptr;
-	// t_stack	*ptr2;
-	// int		count;
 
 	if (!stack_a)
 		return (NULL);
@@ -95,27 +120,18 @@ t_stack	*ft_stacklast(t_stack *stack_a)
 		ptr = ptr->next;
 	return (ptr);
 }
-	// if (stack_a == NULL)
-	// 	return (NULL);
-	// ptr = stack_a;
-	// count = 0;
-	// while (ptr != NULL)
-	// {
-	// 	ptr = ptr -> next;
-	// 	count++;
-	// }
-	// ptr2 = stack_a;
-	// while (count > 1)
-	// {
-	// 	ptr2 = ptr2 -> next;
-	// 	count--;
-	// }
-	// return (ptr2);
 
-// void	ft_stackdelone(t_stack *stack_a, void (*del)(void *))
-// {
-// 	if (stack_a == NULL || del == NULL)
-// 		return ;
-// 	del(stack_a->data);
-// 	free(lst);
-// }
+void	free_stack(t_stack *stack)
+{
+	t_stack	*ptr;
+	t_stack	*ptr2;
+
+	ptr = stack;
+	while (stack)
+	{
+		ptr2 = ptr->next;
+		stack = (stack)->next;
+		free(ptr);
+		ptr = ptr2;
+	}
+}
