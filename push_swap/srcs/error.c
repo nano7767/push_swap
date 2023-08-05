@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:23:18 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/04 17:29:21 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/05 09:03:19 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 void	ft_error(long num, char *arg_split, t_stack *stack_a)
 {
 	int	i;
+
 	i = 0;
 	while (arg_split[i])
 	{
 		if (arg_split[i] == '\t' || arg_split[i] == '\n' || arg_split[i] == '\v'
-			|| arg_split[i] == '\f' || arg_split[i] == '\r' || arg_split[i] == ' ')
+			|| arg_split[i] == '\f' || arg_split[i] == '\r'
+			|| arg_split[i] == ' ')
 			i++;
 		if (arg_split[i] != '+' && arg_split[i] != '-')
 		{

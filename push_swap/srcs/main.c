@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 15:05:59 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/04 17:20:00 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/05 08:58:45 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	t_vars	v;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	stack_a = init_stack();
 	i = 0;
@@ -66,7 +66,7 @@ void	get_val(t_stack **stack_a, char *arg)
 {
 	char	**arg_split;
 	int		i;
-	long		num;
+	long	num;
 
 	arg_split = ft_split(arg, ' ');
 	i = 0;

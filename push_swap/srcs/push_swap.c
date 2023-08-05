@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:42:12 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/04 17:39:09 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/05 09:20:05 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	push_swap(t_stack **stack_a, t_stack **stack_b)
 	else
 		radix_sort(stack_a, stack_b);
 	// t_stack	*ptr;
-
 	// ptr = *stack_a;
 	// while (ptr)
 	// {
@@ -49,7 +48,8 @@ t_stack	*min_node(t_stack **stack_a)
 	min = NULL;
 	while (ptr)
 	{
-		if ((min == NULL && ptr->indx == 0) || (ptr->indx == 0 && ptr->data < min->data))
+		if ((min == NULL && ptr->indx == 0)
+			|| (ptr->indx == 0 && ptr->data < min->data))
 			min = ptr;
 		ptr = ptr->next;
 	}

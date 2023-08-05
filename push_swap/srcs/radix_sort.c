@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:30:09 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/04 17:27:16 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/05 09:14:44 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ void	radix_sort(t_stack **stack_a, t_stack **stack_b)
 		while (j < lstlen)
 		{
 			if (((*stack_a)->indx >> i) & 1)
-			{
 				ra(stack_a);
-			}
 			else
 			{
 				pb(stack_a, stack_b);
