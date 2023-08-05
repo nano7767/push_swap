@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 15:27:42 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/04 17:35:56 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/05 09:57:10 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	push_smallest(t_stack **stack_a, t_stack **stack_b);
 //radix_sort.c
 int	get_bits(t_stack *stack_a);
 void	radix_sort(t_stack **stack_a, t_stack **stack_b);
+void	radix(t_stack **stack_a, t_stack **stack_b, int lstlen, int i);
 
 //push_swap.c
 void	push_swap(t_stack **stack_a, t_stack **stack_b);

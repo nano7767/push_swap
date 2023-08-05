@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:42:12 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/05 09:20:05 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/05 09:59:33 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ void	push_swap(t_stack **stack_a, t_stack **stack_b)
 		sort_five(stack_a, stack_b);
 	else
 		radix_sort(stack_a, stack_b);
-	// t_stack	*ptr;
-	// ptr = *stack_a;
-	// while (ptr)
-	// {
-	// 	printf("%ld ", ptr->data);
-	// 	ptr = ptr->next;
-	// }
 	free_stack(*stack_a);
 	free_stack(*stack_b);
 }
