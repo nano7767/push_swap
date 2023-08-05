@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:16:32 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/05 09:06:24 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/05 10:29:51 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	sort_three(t_stack **stack_a)
 	ptr = *stack_a;
 	if ((ptr->data > ptr->next->data) && (ptr->next->data 
 			< ptr->next->next->data) && (ptr->data < ptr->next->next->data))
-	{
 		sa(stack_a);
-	}
 	else if ((ptr->data > ptr->next->data) && (ptr->next->data
 			> ptr->next->next->data) && (ptr->data > ptr->next->next->data))
 	{
@@ -40,8 +38,6 @@ void	sort_three(t_stack **stack_a)
 	else if ((ptr->data < ptr->next->data) && (ptr->next->data
 			> ptr->next->next->data) && (ptr->data > ptr->next->next->data))
 		rra(stack_a);
-	else if ((ptr->data > ptr->next->data))
-		sa(stack_a);
 }
 
 void	sort_four(t_stack **stack_a, t_stack **stack_b)
@@ -60,22 +56,47 @@ void	sort_five(t_stack **stack_a, t_stack **stack_b)
 	pa(stack_a, stack_b);
 }
 
+// void	push_smallest(t_stack **stack_a, t_stack **stack_b)
+// {
+// 	t_stack	*ptr;
+// 	t_stack	*min;
+// 	int		i;
+
+// 	ptr = *stack_a;
+// 	min = ptr;
+// 	i = 0;
+// 	while (ptr)
+// 	{
+// 		if (ptr->data < min->data)
+// 			min = ptr;
+// 		ptr = ptr->next;
+// 		i++;
+// 	}
+// 	i = 0;
+// 	ptr = *stack_a;
+// 	while (ptr != min)
+// 	{
+// 		ptr = ptr->next;
+// 		i++;
+// 	}
+// 	while (*stack_a != min)
+// 	{
+// 		if (i <= 2)
+// 			ra(stack_a);
+// 		else
+// 			rra(stack_a);
+// 	}
+// 	pb(stack_a, stack_b);
+// 	(*stack_a)->len--;
+// }
+
 void	push_smallest(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*ptr;
 	t_stack	*min;
 	int		i;
 
-	ptr = *stack_a;
-	min = ptr;
-	i = 0;
-	while (ptr)
-	{
-		if (ptr->data < min->data)
-			min = ptr;
-		ptr = ptr->next;
-		i++;
-	}
+	min = find_min(*stack_a);
 	i = 0;
 	ptr = *stack_a;
 	while (ptr != min)
@@ -92,4 +113,20 @@ void	push_smallest(t_stack **stack_a, t_stack **stack_b)
 	}
 	pb(stack_a, stack_b);
 	(*stack_a)->len--;
+}
+
+t_stack	*find_min(t_stack *stack_a)
+{
+	t_stack	*ptr;
+	t_stack	*min;
+
+	ptr = stack_a;
+	min = ptr;
+	while (ptr)
+	{
+		if (ptr->data < min->data)
+			min = ptr;
+		ptr = ptr->next;
+	}
+	return (min);
 }

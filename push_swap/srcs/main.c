@@ -6,48 +6,11 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 15:05:59 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/05 10:16:45 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/05 10:18:15 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// int	main(int argc, char **argv)
-// {
-// 	t_stack	*stack_a;
-// 	t_stack	*stack_b;
-// 	t_vars	v;
-// 	int		i;
-// 	int		j;
-
-// 	stack_a = init_stack();
-// 	i = 0;
-// 	v.characters = 0;
-// 	while (i < argc - 1)
-// 	{
-// 		j = 0;
-// 		while (argv[i + 1][j])
-// 		{
-// 			if ((argv[i + 1][j] != ' ') && argv[i + 1][j] != '\t')
-// 				v.characters++;
-// 			if (argv[i + 1][j] == '\t')
-// 				argv[i + 1][j] = ' ';
-// 			j++;
-// 		}
-// 		if (v.characters == 0)
-// 		{
-// 			write(2, "Error\n", 6);
-// 			exit(1);
-// 		}
-// 		v.characters = 0;
-// 		get_val(&stack_a, argv[i + 1]);
-// 		i++;
-// 	}
-// 	check_dup(stack_a);
-// 	check_sort(stack_a);
-// 	stack_b = init_stack();
-// 	push_swap(&stack_a, &stack_b);
-// }
 
 int	main(int argc, char **argv)
 {
@@ -126,20 +89,6 @@ void	get_val(t_stack **stack_a, char *arg)
 	free(arg_split);
 }
 
-// t_stack	*ft_newnode(int num)
-// {
-// 	t_stack	*new;
-
-// 	new = NULL;
-// 	new = (t_stack *)malloc(sizeof(t_stack));
-// 	if (!new)
-// 		return (NULL);
-// 	new->data = num;
-// 	new->indx = 0;
-// 	new->next = NULL;
-// 	return (new);
-// }
-
 void	num_to_stack(t_stack **stack_a, int num)
 {
 	t_stack	*new_node;
@@ -165,24 +114,3 @@ void	num_to_stack(t_stack **stack_a, int num)
 	ptr->next = new_node;
 	(*stack_a)->len++;
 }
-
-// void	num_to_stack(t_stack **stack_a, int num)
-// {
-// 	t_stack	*new_node;
-// 	t_stack	*ptr;
-
-// 	new_node = ft_newnode(num);
-// 	if ((*stack_a)->len == 0)
-// 	{
-// 		free(*stack_a);
-// 		*stack_a = NULL;
-// 		*stack_a = new_node;
-// 		(*stack_a)->len++;
-// 		return ;
-// 	}
-// 	ptr = *stack_a;
-// 	while (ptr->next)
-// 		ptr = ptr->next;
-// 	ptr->next = new_node;
-// 	(*stack_a)->len++;
-// }
