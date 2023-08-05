@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 15:27:42 by svikornv          #+#    #+#             */
-/*   Updated: 2023/08/05 09:57:10 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/08/05 10:11:58 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ typedef	struct s_vars
 }		t_vars;
 //main.c
 t_stack	*init_stack(void);
+void	check_tab(char **argv, int i);
 void	get_val(t_stack **stack_a, char *arg);
 void	num_to_stack(t_stack **stack_a, int num);
-t_stack	*ft_stacklast(t_stack *stack_a);
 void	free_stack(t_stack *stack);
 
 //error.c
